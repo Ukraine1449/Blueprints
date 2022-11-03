@@ -1,6 +1,13 @@
 package com.github.ukraine1449.blueprint_plugin;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.sql.Connection;
@@ -102,5 +109,28 @@ public final class Blueprint_plugin extends JavaPlugin {
             }
         });
         return tier[0];
+    }
+    public void createCustomRecipe(){
+        ItemStack totem = new ItemStack(Material.TOTEM_OF_UNDYING);
+        ItemMeta meta = totem.getItemMeta();
+        meta.setDisplayName(ChatColor.GREEN + "Crafted totem");
+        totem.setItemMeta(meta);
+        NamespacedKey key = new NamespacedKey(this, "Crafted-Totem");
+        ShapedRecipe recipe = new ShapedRecipe(key, totem);
+        recipe.shape(" E ", "GGG", " G ");
+        recipe.setIngredient('E', Material.EMERALD);
+        recipe.setIngredient('G', Material.GOLD_INGOT);
+        Bukkit.addRecipe(recipe);
+
+        ItemStack saddle = new ItemStack(Material.TOTEM_OF_UNDYING);
+        ItemMeta smeta = saddle.getItemMeta();
+        smeta.setDisplayName(ChatColor.GREEN + "Crafted Saddle");
+        saddle.setItemMeta(smeta);
+        NamespacedKey skey = new NamespacedKey(this, "Crafted-Saddle");
+        ShapedRecipe srecipe = new ShapedRecipe(skey, saddle);
+        srecipe.shape("LLL", "  S", "   ");
+        srecipe.setIngredient('L', Material.LEATHER);
+        srecipe.setIngredient('S', Material.STRING);
+        Bukkit.addRecipe(srecipe);
     }
 }
