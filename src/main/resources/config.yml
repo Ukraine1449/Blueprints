@@ -1,0 +1,5 @@
+DB:
+  ip: 127.0.0.1
+  password:
+  username: root
+  database_name: testdb

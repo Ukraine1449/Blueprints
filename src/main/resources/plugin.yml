@@ -1,0 +1,6 @@
+name: Blueprint_plugin
+version: '${project.version}'
+main: com.github.ukraine1449.blueprint_plugin.Blueprint_plugin
+api-version: 1.18
+authors: [ Ukraine1449 ]
+description: A plugin to create a tech tree with blueprints for different items. 
