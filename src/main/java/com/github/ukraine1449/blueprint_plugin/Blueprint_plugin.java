@@ -5,6 +5,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Item;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -14,15 +16,21 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public final class Blueprint_plugin extends JavaPlugin {
-
+public HashMap<Player, Integer> playerTierList = new HashMap<>();
+public ArrayList<Material> tier1 = new ArrayList<>();
+public ArrayList<Material> tier2 = new ArrayList<>();
+public ArrayList<Material> tier3 = new ArrayList<>();
     @Override
     public void onEnable() {
         // Plugin startup logic
         getConfig().options().copyDefaults();
         saveDefaultConfig();
         createCraftDB();
+        createCustomRecipe();
     }
 
     @Override
@@ -132,5 +140,24 @@ public final class Blueprint_plugin extends JavaPlugin {
         srecipe.setIngredient('L', Material.LEATHER);
         srecipe.setIngredient('S', Material.STRING);
         Bukkit.addRecipe(srecipe);
+    }
+    public void addToList(Player player){
+        int tier = getUserTier(player.getUniqueId().toString());
+        playerTierList.put(player, tier);
+    }
+    public void addToTierLists(){
+        tier1.add(Material.IRON_SWORD);
+        tier1.add(Material.IRON_HELMET);
+        tier1.add(Material.IRON_CHESTPLATE);
+        tier1.add(Material.IRON_LEGGINGS);
+        tier1.add(Material.IRON_BOOTS);
+        tier1.add(Material.SHIELD);
+        
+        tier1.add(Material.DIAMOND_SWORD);
+        tier1.add(Material.IRON_HELMET);
+        tier1.add(Material.IRON_CHESTPLATE);
+        tier1.add(Material.IRON_LEGGINGS);
+        tier1.add(Material.IRON_BOOTS);
+        tier1.add(Material.SHIELD);
     }
 }
